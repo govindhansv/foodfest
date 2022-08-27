@@ -1,0 +1,22 @@
+{
+  "name": "myapp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "*",
+    "debug": "*",
+    "dotenv": "*",
+    "express": "*",
+    "express-handlebars": "*",
+    "express-session": "*",
+    "hbs": "*",
+    "http-errors": "*",
+    "mongodb": "*",
+    "morgan": "*",
+    "nodemon": "*"
+  }
+}
