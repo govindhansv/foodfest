@@ -1,53 +1,55 @@
- 
-    const { ObjectId } = require('mongodb');
-        const db = require('../connection');
+const fun = require('../functions');
 
-        const getAllAuths = async function (req, res) {
-        let data = await db.get().collection('auths').find().toArray()
-        res.render('pages/allauths',{data});
+const getSignup = async function (req, res) {
+    if (req.session.signupstatusfalse) {
+        res.render('forms/signup', { err: true })
+    } else
+        res.render('forms/signup')
+}
+
+const postSignup = async function (req, res) {
+    console.log(req.body);
+    fun.doSignup(req.body).then((response) => {
+        console.log('post');
+        if (response.signupstatus) {
+            response.loggedIN = true
+            console.log(response);
+            res.json(response)
+        } else {
+            response.loggedIN = false
+            res.json(response)
         }
+    })
+}
 
-        const getAuthAddform = async function (req, res) {
-        res.render('forms/addauth');
+const getSignin = async function (req, res) {
+    console.log(req.session);
+    if (req.session.loggedIN) {
+        res.redirect('/users/')
+    }
+    if (req.session.loggedfalse) {
+        res.render('forms/signin', { err: true });
+    } else {
+        res.render('forms/signin');
+    }
+}
+
+const postSignin = async function (req, res) {
+    fun.doLogin(req.body).then((response) => {
+        if (response.loginstatus) {
+            response.loggedIN = true
+            res.json(response)
+        } else {
+            response.loggedIN = false
+            res.json(response)
         }
+    })
+}
 
-        const addAuth = async function (req, res) {
-        let data = req.body
-        await db.get().collection('auths').insertOne(data)
-        res.render('pages/auth', { data })
-        }
 
-        const getAuthEditform = async function (req, res) {
-        let id = req.params.id
-        let data = await db.get().collection('auths').findOne({ _id: ObjectId(id) })
-        res.render('forms/editauth', { data });
-        }
+exports.getSignup = getSignup;
+exports.postSignup = postSignup;
+exports.getSignin = getSignin;
+exports.postSignin = postSignin;
 
-        const editAuth = async function (req, res) {
-        let newdata = req.body
-        let query = { _id: ObjectId(req.body.id) }
-        var newvalues = { $set: { name: newdata.name,} };
-        await db.get().collection('auths').updateOne(query, newvalues)
-        res.redirect(`/auths/${req.body.id}`)
-        }
 
-        const deleteAuth = async function (req, res) {
-        let id = req.params.id
-        await db.get().collection('auths').deleteOne({ _id: ObjectId(id) })
-        res.redirect('back')
-        }
-
-        const getAuthById = async function (req, res) {
-        let id = req.params.id
-        let data = await db.get().collection('auths').findOne({ _id: ObjectId(id) })
-        res.render('pages/auth', { data });
-        }
-
-        exports.getAllAuths = getAllAuths;
-        exports.getAuthAddform = getAuthAddform;
-        exports.addAuth = addAuth;
-        exports.getAuthEditform = getAuthEditform;
-        exports.editAuth = editAuth;
-        exports.deleteAuth = deleteAuth;
-        exports.getAuthById = getAuthById;
-    

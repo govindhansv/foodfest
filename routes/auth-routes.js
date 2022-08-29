@@ -1,14 +1,11 @@
-    
-    const express = require("express");
-    const router = express.Router();
-    const authsController = require("../controllers/auths-controller");
+const express = require("express");
+const router = express.Router();
+const authsController = require("../controllers/auths-controller");
 
-    router.get("/", authsController.getAllAuths);
-    router.get('/add', authsController.getAuthAddform);
-    router.post("/add", authsController.addAuth);
-    router.get('/edit/:id',authsController.getAuthEditform);
-    router.post("/edit", authsController.editAuth);
-    router.get('/:id', authsController.getAuthById);
-    router.get("/delete/:id", authsController.deleteAuth);
+router.get('/signup', authsController.getSignup);
+router.post("/signup", authsController.postSignup);
+router.get('/signin', authsController.getSignin);
+router.post("/signin", authsController.postSignin);
 
-    module.exports = router;
+
+module.exports = router;
