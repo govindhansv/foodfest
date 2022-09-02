@@ -13,11 +13,12 @@ const postSignup = async function (req, res) {
         console.log('post');
         if (response.signupstatus) {
             response.loggedIN = true
+            req.session.user = response
             console.log(response);
-            res.json(response)
+            res.redirect('/')
         } else {
             response.loggedIN = false
-            res.json(response)
+            res.redirect('auths/signup')
         }
     })
 }
@@ -25,7 +26,7 @@ const postSignup = async function (req, res) {
 const getSignin = async function (req, res) {
     console.log(req.session);
     if (req.session.loggedIN) {
-        res.redirect('/users/')
+        res.redirect('/auths/')
     }
     if (req.session.loggedfalse) {
         res.render('forms/signin', { err: true });
@@ -38,10 +39,10 @@ const postSignin = async function (req, res) {
     fun.doLogin(req.body).then((response) => {
         if (response.loginstatus) {
             response.loggedIN = true
-            res.json(response)
+            res.redirect('/')
         } else {
             response.loggedIN = false
-            res.json(response)
+            res.redirect('/')
         }
     })
 }
