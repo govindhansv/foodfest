@@ -1,53 +1,47 @@
- 
-    const { ObjectId } = require('mongodb');
-        const db = require('../connection');
+const { ObjectId } = require('mongodb');
+const db = require('../connection');
 
-        const getAllCarts = async function (req, res) {
-        let data = await db.get().collection('carts').find().toArray()
-        res.render('pages/allcarts',{data});
-        }
+const getAllCarts = async function(req, res) {
+    let user = req.session.user.user;
+    let data = await db.get().collection('carts').find({ user: user._id }).toArray()
+    let total1 = 0;
+    total1 + data[0].product.price;
+    console.log(total1);
 
-        const getCartAddform = async function (req, res) {
-        res.render('forms/addcart');
-        }
+    let total = 0;
+    data.forEach(element => {
+        // console.log(Number element.product.price);
+        total += Number(element.product.price);
+    });
 
-        const addCart = async function (req, res) {
-        let data = req.body
-        await db.get().collection('carts').insertOne(data)
-        res.render('pages/cart', { data })
-        }
+    res.render('pages/allcarts', { data, total, user: req.session.user });
+}
 
-        const getCartEditform = async function (req, res) {
-        let id = req.params.id
-        let data = await db.get().collection('carts').findOne({ _id: ObjectId(id) })
-        res.render('forms/editcart', { data });
-        }
+const addToCart = async function(req, res) {
+    let id = req.params.id
+    let user = req.session.user.user._id;
+    let product = await db.get().collection('products').findOne({ _id: ObjectId(id) })
+    let cart = { product: product, user: user };
+    await db.get().collection('carts').insertOne(cart)
+    res.json({ status: true })
+        // res.redirect('back')
+}
 
-        const editCart = async function (req, res) {
-        let newdata = req.body
-        let query = { _id: ObjectId(req.body.id) }
-        var newvalues = { $set: { name: newdata.name,} };
-        await db.get().collection('carts').updateOne(query, newvalues)
-        res.redirect(`/carts/${req.body.id}`)
-        }
+const deleteCart = async function(req, res) {
+    let user = req.session.user.user;
+    let id = req.params.id
+    await db.get().collection('carts').deleteOne({ _id: ObjectId(id), user: user._id })
+    res.redirect('back')
+}
 
-        const deleteCart = async function (req, res) {
-        let id = req.params.id
-        await db.get().collection('carts').deleteOne({ _id: ObjectId(id) })
-        res.redirect('back')
-        }
+const getCartById = async function(req, res) {
+    let id = req.params.id
+    let data = await db.get().collection('products').findOne({ _id: ObjectId(id) })
+    res.render('pages/product', { data, user: req.session.user });
+}
 
-        const getCartById = async function (req, res) {
-        let id = req.params.id
-        let data = await db.get().collection('carts').findOne({ _id: ObjectId(id) })
-        res.render('pages/cart', { data });
-        }
 
-        exports.getAllCarts = getAllCarts;
-        exports.getCartAddform = getCartAddform;
-        exports.addCart = addCart;
-        exports.getCartEditform = getCartEditform;
-        exports.editCart = editCart;
-        exports.deleteCart = deleteCart;
-        exports.getCartById = getCartById;
-    
+exports.getAllCarts = getAllCarts;
+exports.deleteCart = deleteCart;
+exports.getCartById = getCartById;
+exports.addToCart = addToCart;

@@ -1,0 +1,24 @@
+<div class="center">
+
+    <div class="center-div">
+
+        dashboard {{user.user.name}} {{user.user.admin}}
+
+        <a href="/products/add">add</a>
+        <a href=""></a>
+
+        {{#each data}}
+        <div class="center">
+            <div class="center-div">
+                <h1>{{this.name}}</h1>
+                <h1>{{this.price}}</h1>
+                <img src="{{this.image}}" alt="">
+                <a href="/products/edit/{{this._id}}">edit</a>
+                <a href="/products/delete/{{this._id}}">delete</a>
+                <a href="/products/{{this._id}}">delete</a>
+
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
