@@ -4,7 +4,7 @@ const db = require('../connection');
 const getAllFavourites = async function(req, res) {
     let user = req.session.user.user;
     let data = await db.get().collection('favourites').find({ user: user._id }).toArray()
-    res.render('pages/allfavourites', { data });
+    res.render('pages/allfavourites', { data, user: req.session.user });
 }
 
 const addFavourite = async function(req, res) {
@@ -27,7 +27,7 @@ const deleteFavourite = async function(req, res) {
 const getFavouriteById = async function(req, res) {
     let id = req.params.id
     let data = await db.get().collection('favourites').findOne({ _id: ObjectId(id) })
-    res.render('pages/favourite', { data });
+    res.render('pages/favourite', { data, user: req.session.user });
 }
 
 exports.getAllFavourites = getAllFavourites;

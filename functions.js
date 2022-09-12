@@ -49,9 +49,13 @@ module.exports = {
             }
         })
     },
+
     createOrder: (data, total, user) => {
         return new Promise(async(resolve, reject) => {
-            let order = { products: data, total: total, user: user }
+            var datetime = new Date().toLocaleString();
+            console.log(datetime);
+            let order = { products: data, total: total, user: user, status: 'recieved', datetime: datetime }
+            db.get().collection('carts').deleteMany({ "user": user })
             db.get().collection('orders').insertOne(order).then((response) => {
                 resolve(response.insertedId)
             })

@@ -13,6 +13,7 @@ const getProductAddform = async function(req, res) {
 
 const addProduct = async function(req, res) {
     let data = req.body
+    console.log(data);
     await db.get().collection('products').insertOne(data)
     res.render('pages/product', { data })
 }

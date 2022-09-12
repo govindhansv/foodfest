@@ -66,17 +66,18 @@
 <script>
     let image;
 
-    let name = document.getElementById('name').value;
-    let sdes = document.getElementById('sdes').value;
-    let ldes = document.getElementById('ldes').value;
-    let tags = document.getElementById('tags').value;
-    let price = document.getElementById('price').value;
 
+
+    console.log(price)
 
     $("button").click(async function () {
         let image = await updateImageDisplay();
 
-
+        let name = document.getElementById('name').value;
+        let sdes = document.getElementById('sdes').value;
+        let ldes = document.getElementById('ldes').value;
+        let tags = document.getElementById('tags').value;
+        let price = document.getElementById('price').value;
 
         $.post("/products/add/",
             {
@@ -89,9 +90,9 @@
 
     });
 
-
+    
     const input = document.getElementById('image');
-   
+
     //product-images/jn3gnnuwwyvuw66ul9w6.png
     function preview(e) {
         document.getElementById('imgview').src = URL.createObjectURL(e.target.files[0])

@@ -1,4 +1,17 @@
 <div class="flex flex-col max-w-3xl p-6 space-y-4 sm:p-10  text-gray-800">
+      {{#if empty}}
+      <h2 class="text-xl font-semibold">Your cart is empty</h2>
+    
+
+
+      <div class="flex justify-end space-x-4">
+      <a  href="/" type="button" class="px-6 py-2 border rounded-md border-purple-600">Back
+            <span class="sr-only sm:not-sr-only">to shop</span>
+      </a>
+      </div>
+    
+
+      {{else}}
       <h2 class="text-xl font-semibold">Your cart</h2>
       {{#each data}}
 
@@ -56,14 +69,16 @@
       <p class="text-sm text-gray-600">Not including taxes and shipping costs</p>
 </div>
 <div class="flex justify-end space-x-4">
-      <button type="button" class="px-6 py-2 border rounded-md border-purple-600">Back
+      <a href="/" type="button" class="px-6 py-2 border rounded-md border-purple-600">Back
             <span class="sr-only sm:not-sr-only">to shop</span>
-      </button>
+      </a>
       <a href="/checkouts/" class="px-6 py-2 border rounded-md bg-purple-600 text-gray-50 border-purple-600">
             <span class="sr-only sm:not-sr-only">Continue to</span>Checkout
 
       </a>
 </div>
+
+{{/if}}
 </div>
 
 

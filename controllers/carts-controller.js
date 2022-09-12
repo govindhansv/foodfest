@@ -4,17 +4,26 @@ const db = require('../connection');
 const getAllCarts = async function(req, res) {
     let user = req.session.user.user;
     let data = await db.get().collection('carts').find({ user: user._id }).toArray()
-    let total1 = 0;
-    total1 + data[0].product.price;
-    console.log(total1);
+    console.log(data);
+    let empty;
+    let total;
+    let total1;
+    if (data.length == 0) {
+        empty = true;
+    } else {
+        total1 = 0;
+        total1 + data[0].product.price;
+        console.log(total1);
 
-    let total = 0;
-    data.forEach(element => {
-        // console.log(Number element.product.price);
-        total += Number(element.product.price);
-    });
+        total = 0;
+        data.forEach(element => {
+            // console.log(Number element.product.price);
+            total += Number(element.product.price);
+        });
+    }
 
-    res.render('pages/allcarts', { data, total, user: req.session.user });
+
+    res.render('pages/allcarts', { data, total, empty, user: req.session.user });
 }
 
 const addToCart = async function(req, res) {
