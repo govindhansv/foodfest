@@ -127,7 +127,7 @@
                 </li>
                 <li>
                     <a href="/auths/logout"
-                        class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{{user.user.name}}
+                        class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Logout
                     </a>
                 </li>
 
@@ -170,7 +170,7 @@ $(document).ready(function(){
         // Loop through all list items, and hide those who don't match the search query
 
         for (i = 0; i < li.length; i++) {
-            b = li[i].getElementsByTagName("h5")[0];
+            b = li[i].getElementsByTagName("a")[0];
             txtValue1 = b.textContent || b.innerText;
 
             if (txtValue1.toUpperCase().indexOf(filter) > -1) {

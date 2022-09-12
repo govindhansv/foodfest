@@ -4,9 +4,9 @@
          <!-- images - start -->
          <div class="space-y-4">
             <div class="bg-gray-100 rounded-lg overflow-hidden ">
-               {{!-- <img
-                  src="https://images.unsplash.com/flagged/photo-1571366992942-be878c7b10c0?auto=format&q=75&fit=crop&w=600"
-                  loading="lazy" alt="Photo by Himanshu Dewangan" class="w-full h-full object-cover object-center" /> --}}
+               <img
+                  src="{{data.image}}"
+                  loading="lazy" alt="Photo by Himanshu Dewangan" class="w-full h-full object-cover object-center" />
 
             </div>
 
@@ -30,8 +30,8 @@
          <div class="md:py-8">
             <!-- name - start -->
             <div class="mb-2 md:mb-3">
-               <span class="inline-block text-gray-500 mb-0.5">{{data.name}}</span>
-               <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold">Pullover with pattern</h2>
+               <span class="inline-block text-gray-500 mb-0.5">{{data.sdes}}</span>
+               <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold">{{data.name}}</h2>
             </div>
             <!-- name - end -->
 
@@ -159,12 +159,7 @@
                <div class="text-gray-800 text-lg font-semibold mb-3">Description</div>
 
                <p class="text-gray-500">
-                  This is a section of some simple filler text, also known as placeholder text. It shares some
-                  characteristics of a real written text but is random or otherwise generated. It may be used to display
-                  a sample of fonts or generate text for testing.<br /><br />
-
-                  This is a section of some simple filler text, also known as placeholder text. It shares some
-                  characteristics of a real written text but is random or otherwise generated.
+                  {{this.product.ldes}}
                </p>
             </div>
             <!-- description - end -->
