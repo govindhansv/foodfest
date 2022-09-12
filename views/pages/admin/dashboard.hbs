@@ -149,11 +149,11 @@
     </div>
 
     <div class="px-6 pt-6 2xl:container">
-        <div class="flex justify-center items-center h-[80vh] border-2 border-dashed border-gray-300 rounded-xl">
+        <div id="parent" class=" flex justify-center items-center h-[80vh] border-2 border-dashed border-gray-300 rounded-xl">
             {{#each data}}
-            <div class="center">
+            <div class="searchitem center">
                 <div class="center-div">
-                    <h1>{{this.name}}</h1>
+                    <h5>{{this.name}}</h5>
                     <h1>{{this.price}}</h1>
                     <img src="{{this.image}}" alt="">
                     <a href="/products/edit/{{this._id}}">edit</a>

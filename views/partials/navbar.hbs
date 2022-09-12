@@ -1,3 +1,6 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
 <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900 fixed top-0 w-screen z-100">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
         <a href="https://flowbite.com/" class="flex items-center">
@@ -32,7 +35,7 @@
                         placeholder="Search...">
                 </form>
             </div>
-            <button data-collapse-toggle="navbar-search" type="button"
+            <button data-collapse-toggle="navbar-search" type="button" id="togglebtn"
                 class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 aria-controls="navbar-search" aria-expanded="false">
                 <span class="sr-only">Open menu</span>
@@ -44,7 +47,6 @@
                 </svg>
             </button>
         </div>
-        <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-search">
             <div class="relative mt-3 md:hidden">
                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                     <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
@@ -54,10 +56,12 @@
                             clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <input type="text" id="search-navbar"
-                    class="block p-2 pl-10 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                <input type="text" id="search-navbar" onkeyup="myFunction()"
+                    class="block p-2 pl-10 w-screen text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Search...">
             </div>
+
+        <div class="lg:block hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-search">
 
             <ul
                 class="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
@@ -100,9 +104,9 @@
                 <li>
                     <a href="/auths/admin/logout"
                         class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-                   Logout </a>
+                        Logout </a>
                 </li>
-            
+
                 {{else if user}}
 
                 <li>
@@ -147,7 +151,42 @@
 
 
 <script>
+    
+    
+$(document).ready(function(){
+  $("#togglebtn").click(function(){
+    $("#navbar-search").toggle();
+  });
+});
+
     function myFunction() {
+        console.log('c')
+        // Declare variables
+        var input, filter, ul, li, a, i, txtValue, txtValue1, txtValue2;
+        input = document.getElementById('search-navbar');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("parent");
+        li = ul.getElementsByClassName('searchitem');
+        // Loop through all list items, and hide those who don't match the search query
+
+        for (i = 0; i < li.length; i++) {
+            b = li[i].getElementsByTagName("h5")[0];
+            txtValue1 = b.textContent || b.innerText;
+
+            if (txtValue1.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+{{!--
+
+<script>
+    function myFunction() {
+        console.log('c')
         // Declare variables
         var input, filter, ul, li, a, i, txtValue, txtValue1, txtValue2;
         input = document.getElementById('search-navbar');
@@ -171,4 +210,4 @@
             }
         }
     }
-</script>
+</script> --}}
