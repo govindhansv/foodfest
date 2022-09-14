@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const authsController = require("../controllers/auths-controller");
 const adminControllers = require("../controllers/admins-controller");
-const requiredadmin = require("../authentication");
+const {
+    requiredadmin
+} = require("../authentication");
 
 const hide = (req, res, next) => {
     if (req.session.admin) {

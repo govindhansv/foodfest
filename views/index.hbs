@@ -151,6 +151,8 @@
             success:(response)=>{
                 if(response.status){
                 alert('Item Added to cart');
+                }else{
+                window.location=  "http://localhost:3000/auths/signup/";
                 }
             }
         })
@@ -162,6 +164,8 @@
             success:(response)=>{
                 if(response.status){
                 alert('Item Added to Fav');
+                }else{
+                window.location=  "http://localhost:3000/auths/signup/";
                 }
             }
         })
