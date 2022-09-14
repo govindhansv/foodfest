@@ -5,7 +5,7 @@ const {
     requiredlogin
 } = require("../authentication");
 
-router.get("/", favouritesController.getAllFavourites);
+router.get("/", requiredlogin, favouritesController.getAllFavourites);
 router.get('/add/:id', requiredlogin, favouritesController.addFavourite);
 router.get('/:id', favouritesController.getFavouriteById);
 router.get("/delete/:id", favouritesController.deleteFavourite);

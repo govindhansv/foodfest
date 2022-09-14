@@ -1,3 +1,5 @@
+
+
 <div id="parent" class="flex flex-col max-w-3xl p-6 space-y-4 sm:p-10  text-gray-800">
       <h2 class="text-xl font-semibold">Favorites</h2>
 {{#each data}}
@@ -15,8 +17,7 @@
                                           <p class="text-sm text-gray-600">Classic</p>
                                     </d>
                                     <div class="text-right">
-                                          <p class="text-lg font-semibold">59.99€</p>
-                                          <p class="text-sm line-through text-gray-400">75.50€</p>
+                                          <p class="text-lg font-semibold">{{this.product.price}}€</p>
                                     </div>
                               </div>
                               <div class="flex text-sm divide-x">
@@ -39,8 +40,9 @@
                                           </span>
 
                                     </button>
-                                    <button type="button" class="flex items-center px-2 py-1 space-x-1 text-red-500">
-                                          <span>Buy</span>
+                                    
+                                    <button type="button" onclick="addToCart('{{this._id}}')" class="flex items-center px-2 py-1 space-x-1 text-red-500">
+                                          <span><i class="fa-solid fa-cart-shopping"></i> Add to Cart</span>
                                     </button>
                               </div>
                         </div>
@@ -52,3 +54,5 @@
 
 {{/each}}
 </div>
+
+<script src="/js/script.js"></script>
