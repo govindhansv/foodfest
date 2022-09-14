@@ -2,9 +2,9 @@
     const router = express.Router();
     const cartsController = require("../controllers/carts-controller");
 
-
-    router.get("/", cartsController.getAllCarts);
-    router.get('/add/:id/', cartsController.addToCart);
+const requiredlogin = require("../authentication");
+    router.get("/",requiredlogin, cartsController.getAllCarts);
+    router.get('/add/:id/', requiredlogin, cartsController.addToCart);
     // router.post("/add", cartsController.addCart);
     // router.get('/edit/:id',cartsController.getCartEditform);
     // router.post("/edit", cartsController.editCart);
