@@ -1,22 +1,19 @@
-var express = require('express');
-var router = express.Router();
-const db = require('../connection');
+    const express = require("express");
+    const router = express.Router();
+    const productsController = require("../controllers/products-controller");
+    const db = require('../connection');
 
-/* GET home page. */
-router.get('/', async function(req, res, next) {
-    let user = null;
-    if (req.session) {
-        user = req.session.user
-    }
-    let data = await db.get().collection('products').find().toArray()
+    router.get("/", async(req, res) => {
+        let data = await db.get().collection('products').find().toArray()
+        res.render('index', { data })
+    });
 
-    res.render('index', { data, user: user });
-});
+    // router.get("/", productsController.getAllProducts);
+    router.get('/add', productsController.getProductAddform);
+    router.post("/add", productsController.addProduct);
+    router.get('/edit/:id', productsController.getProductEditform);
+    router.post("/edit", productsController.editProduct);
+    router.get('/:id', productsController.getProductById);
+    router.get("/delete/:id", productsController.deleteProduct);
 
-router.get('/clean', async function(req, res) {
-    await db.get().collection('orders').remove()
-
-    res.redirect('back');
-});
-
-module.exports = router;
+    module.exports = router;

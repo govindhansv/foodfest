@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt')
 var db = require('./connection')
-var ObjectId = require('mongodb').ObjectId
 const Razorpay = require('razorpay');
 
 
@@ -82,7 +81,9 @@ module.exports = {
                 if (err) {
                     console.log(err);
                 }
-                console.log(order);
+                console.log('gen rz', order);
+                resolve(order)
+
             });
         })
     },
