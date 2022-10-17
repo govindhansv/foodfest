@@ -11,9 +11,9 @@
     // router.get("/", productsController.getAllProducts);
     router.get('/add', productsController.getProductAddform);
     router.post("/add", productsController.addProduct);
-    router.get('/edit/:id', productsController.getProductEditform);
+    // router.get('/edit/:id', productsController.getProductEditform); //:id([0-9a-fA-F]{24})
     router.post("/edit", productsController.editProduct);
-    router.get('/:id', productsController.getProductById);
-    router.get("/delete/:id", productsController.deleteProduct);
+    // router.get('/:id', productsController.getProductById);
+    // router.get("/delete/:id", productsController.deleteProduct);
 
     module.exports = router;
